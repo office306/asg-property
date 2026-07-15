@@ -1,0 +1,27 @@
+ASG PROPERTY COMPLETE WEBSITE
+
+UPLOAD
+1. Unzip this package.
+2. Open your GitHub repository.
+3. Upload everything INSIDE the ASG-Property-Complete-Website folder to the repository root.
+4. Replace the existing files when GitHub asks.
+5. Commit the changes.
+
+IMPORTANT
+Keep the folder structure:
+- assets/
+- areas/
+- academy/
+  - landlords/
+  - investors/
+  - refurbishment/
+  - local-guides/
+
+TEST
+https://www.asgproperty.co.uk/
+https://www.asgproperty.co.uk/academy/
+https://www.asgproperty.co.uk/sitemap.xml
+
+GOOGLE SEARCH CONSOLE
+Submit:
+sitemap.xml
