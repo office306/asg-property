@@ -1,10 +1,17 @@
-UPLOAD THIS ZIP CORRECTLY
+ASG PROPERTY PREMIUM V3
 
-1. Download and unzip ASG-Property-V2-Root-Ready.zip.
-2. Open the unzipped folder.
-3. Select ALL items inside it.
-4. Upload those items to the ROOT of your GitHub repository.
-5. You should see index.html, academy/, assets/, areas/, calculators/ directly in the repository.
-6. Do not upload the outer unzipped folder itself.
+Included:
+- Full-width property hero
+- Guaranteed rent offer: up to five years, no voids during the agreed term
+- Dedicated landlord page
+- Before-and-after refurbishment showcase
+- Reviews carousel and testimonials page
+- Floating Call and Enquire buttons
+- Mobile contact bar
+- Service coverage graphic
+- Existing Academy and calculators retained
+- Existing Google Sheets enquiry form retained
+- Updated SEO, sitemap, robots and CNAME
 
-This ZIP is root-ready: its contents are already arranged correctly.
+UPLOAD:
+Upload everything inside this folder to the root of the existing ASG Property GitHub repository and replace existing files.
