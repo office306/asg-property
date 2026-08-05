@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('.year').forEach(el=>el.textContent=new Date().getFullYear());
   document.querySelectorAll('.footer .legal').forEach(legal=>{
