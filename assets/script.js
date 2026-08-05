@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('.year').forEach(el=>el.textContent=new Date().getFullYear());
+  document.querySelectorAll('span').forEach(el=>{
+    if(el.textContent.trim()==='ASG PROPERTY LTD')el.textContent='ASG PROPERTY';
+    if(/^© \d{4} ASG Property Ltd$/.test(el.textContent.trim()))el.textContent=el.textContent.replace('ASG Property Ltd','ASG Property');
+  });
   document.querySelectorAll('.footer .legal').forEach(legal=>{
     const ownership=document.createElement('span');
     ownership.textContent='ASG Property is a trading name of Adeena Property Ltd.';
