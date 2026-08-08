@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded',function(){
     legal.insertBefore(ownership,legal.lastElementChild);
   });
   document.querySelectorAll('.enquiryForm').forEach(form=>{
+    const frame=form.parentElement.querySelector('.submissionFrame');
     const status=form.parentElement.querySelector('.formStatus');
     const btn=form.querySelector('button[type="submit"]');
     let submitted=false;
@@ -40,6 +41,10 @@ document.addEventListener('DOMContentLoaded',function(){
 
       if(!result||result.type!=='asg-enquiry-result')return;
       finishSubmission(result.success===true);
+    });
+
+    frame?.addEventListener('load',()=>{
+      if(submitted)finishSubmission(true);
     });
 
     form.addEventListener('submit',()=>{
