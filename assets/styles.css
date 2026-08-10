@@ -77,14 +77,17 @@ linear-gradient(145deg,#121a1a,#0b1011);position:relative;overflow:hidden}
 .legal{margin-top:24px;padding-top:19px;border-top:1px solid #222d2e;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .floating{position:fixed;right:18px;bottom:18px;z-index:80;display:grid;gap:10px}.floating a{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;box-shadow:0 8px 28px #000;font-size:21px}.call{background:var(--teal);color:#03110e}.quote-float{background:#fff;color:#08100e}
 .mobile-bar{display:none}
+.tenantHero{background:linear-gradient(90deg,rgba(5,8,9,.96) 0%,rgba(5,8,9,.78) 54%,rgba(5,8,9,.28) 100%),url('../images/refurbished-lounge.jpeg') center/cover no-repeat}
+.eligibilityCards{grid-template-columns:repeat(2,1fr);margin-top:0}.eligibilityCards .card{min-height:150px}
+.formEmbed{padding:12px;overflow:hidden}.formEmbed iframe{width:100%;height:760px;border:0;border-radius:18px;background:#fff}.inlineLink{color:var(--teal);font-weight:800;text-decoration:underline}
 @media(max-width:960px){
 .links{display:none}.heroGrid,.two,.foot{grid-template-columns:1fr}.hero{min-height:auto}
-h1{font-size:50px}.cards,.projects,.steps{grid-template-columns:1fr 1fr}.stats,.area-grid{grid-template-columns:1fr 1fr}.reviews{grid-template-columns:1fr}
+h1{font-size:50px}.cards,.projects,.steps{grid-template-columns:1fr 1fr}.stats,.area-grid{grid-template-columns:1fr 1fr}.reviews{grid-template-columns:1fr}.formIntro{align-items:start}
 }
 @media(max-width:650px){
 body{padding-bottom:58px}.topbar{display:none}.mobile-bar{display:grid;position:fixed;left:0;right:0;bottom:0;z-index:100;background:#0b1010;border-top:1px solid var(--line);grid-template-columns:repeat(3,1fr)}
 .mobile-bar a{padding:14px 8px;text-align:center;font-weight:900;border-right:1px solid var(--line)}.mobile-bar a:last-child{background:var(--teal);color:#03110e}
 .heroGrid{padding-top:62px;padding-bottom:62px}.hero{background-position:64% center}h1{font-size:39px}h2.title{font-size:35px}
-.cards,.projects,.steps,.stats,.area-grid,.form{grid-template-columns:1fr}.form textarea,.form .full{grid-column:auto}.btn{width:100%}
+.cards,.projects,.steps,.stats,.area-grid,.form,.eligibilityCards{grid-template-columns:1fr}.form textarea,.form .full{grid-column:auto}.btn{width:100%}.formEmbed iframe{height:820px}
 .before-after{grid-template-columns:1fr}.ba-side img{height:235px}.carousel .review{min-width:300px}.carousel-track{animation:none;overflow-x:auto}.floating{display:none}
 }
