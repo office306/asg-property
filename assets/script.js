@@ -54,4 +54,47 @@ document.addEventListener('DOMContentLoaded',function(){
       confirmationTimer=setTimeout(()=>finishSubmission(false),15000);
     });
   });
+
+  if(document.querySelector('.tenantFormCard')&&!document.querySelector('.tenantFullApplicationForm')){
+    document.querySelectorAll('a[href="#apply"]').forEach(link=>link.href='tenant-buyer-application.html');
+    const card=document.querySelector('.tenantFormCard');
+    card.innerHTML='<div class="formCardHeading"><span class="formStep">ASG Tenant Buyer</span><h3>Start your application</h3><p>Complete our secure three-stage application in a few minutes. Your answers go directly to the ASG team for assessment.</p></div><a class="btn formSubmit" href="tenant-buyer-application.html">Start my application →</a><div class="applicationReassurance"><span>✓ No obligation</span><span>✓ Secure enquiry</span><span>✓ Reviewed by ASG</span></div>';
+  }
+
+  document.querySelectorAll('.tenantFullApplicationForm').forEach(form=>{
+    const stages=[...form.querySelectorAll('.applicationStage')];
+    const progress=form.closest('.bespokeApplicationCard')?.querySelector('.applicationProgress');
+    const sideSteps=[...document.querySelectorAll('.applicationAside li')];
+    const frame=form.parentElement.querySelector('.formResponseFrame');
+    let current=0,submitted=false;
+    const showStage=index=>{
+      current=index;
+      stages.forEach((stage,i)=>stage.classList.toggle('active',i===index));
+      sideSteps.forEach((step,i)=>step.classList.toggle('active',i===index));
+      if(progress){progress.querySelector('b').textContent=index+1;progress.querySelector('i').style.width=((index+1)/stages.length*100)+'%';}
+      form.scrollIntoView({behavior:'smooth',block:'start'});
+    };
+    const validStage=stage=>{
+      const invalid=[...stage.querySelectorAll('input,select,textarea')].find(field=>!field.checkValidity());
+      if(invalid){invalid.reportValidity();invalid.focus();return false;}
+      return true;
+    };
+    form.querySelectorAll('.nextStage').forEach(button=>button.addEventListener('click',()=>{if(validStage(stages[current]))showStage(current+1);}));
+    form.querySelectorAll('.backStage').forEach(button=>button.addEventListener('click',()=>showStage(Math.max(0,current-1))));
+    form.addEventListener('submit',event=>{
+      if(!validStage(stages[current])){event.preventDefault();return;}
+      submitted=true;
+      const button=form.querySelector('.submitApplication');
+      button.disabled=true;button.textContent='Sending application…';
+    });
+    frame?.addEventListener('load',()=>{
+      if(!submitted)return;
+      submitted=false;
+      stages.forEach(stage=>stage.classList.remove('active'));
+      if(progress)progress.style.display='none';
+      form.querySelector('.applicationComplete').classList.add('active');
+      sideSteps.forEach(step=>step.classList.remove('active'));
+      form.scrollIntoView({behavior:'smooth',block:'center'});
+    });
+  });
 });
