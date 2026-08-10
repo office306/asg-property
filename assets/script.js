@@ -62,6 +62,22 @@ document.addEventListener('DOMContentLoaded',function(){
   }
 
   document.querySelectorAll('.tenantFullApplicationForm').forEach(form=>{
+    const correctedFieldNames={
+      'entry.580749950':'entry.246502702',
+      'entry.135270774':'entry.164494162',
+      'entry.246502702':'entry.568137211',
+      'entry.164494162':'entry.1791243014',
+      'entry.568137211':'entry.937044322',
+      'entry.937044322':'entry.1586986225',
+      'entry.1791243014':'entry.166637531',
+      'entry.166637531':'entry.2107073247',
+      'entry.2107073247':'entry.1460724022',
+      'entry.1586986225':'entry.580749950',
+      'entry.1460724022':'entry.674011893',
+      'entry.674011893':'entry.135270774'
+    };
+    [...form.elements].forEach(field=>{if(correctedFieldNames[field.name])field.dataset.correctName=correctedFieldNames[field.name];});
+    [...form.elements].forEach(field=>{if(field.dataset.correctName)field.name=field.dataset.correctName;});
     const stages=[...form.querySelectorAll('.applicationStage')];
     const progress=form.closest('.bespokeApplicationCard')?.querySelector('.applicationProgress');
     const sideSteps=[...document.querySelectorAll('.applicationAside li')];
