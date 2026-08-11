@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded',function(){
     ownership.textContent='ASG Property is a trading name of Adeena Property Ltd.';
     legal.insertBefore(ownership,legal.lastElementChild);
   });
+  document.querySelectorAll('.links').forEach(nav=>{
+    if(nav.querySelector('a[href="properties-available.html"]'))return;
+    const link=document.createElement('a');link.href='properties-available.html';link.textContent='Available Properties';
+    const tenantLink=nav.querySelector('a[href="tenant-buyers.html"]');
+    tenantLink?.insertAdjacentElement('afterend',link);
+  });
   document.querySelectorAll('.enquiryForm').forEach(form=>{
     const frame=form.parentElement.querySelector('.submissionFrame');
     const status=form.parentElement.querySelector('.formStatus');
@@ -78,6 +84,10 @@ document.addEventListener('DOMContentLoaded',function(){
     };
     [...form.elements].forEach(field=>{if(correctedFieldNames[field.name])field.dataset.correctName=correctedFieldNames[field.name];});
     [...form.elements].forEach(field=>{if(field.dataset.correctName)field.name=field.dataset.correctName;});
+    if(new URLSearchParams(location.search).get('property')==='oak-lane-pe8'){
+      const notes=form.querySelector('textarea[name="entry.135270774"]');
+      if(notes&&!notes.value)notes.value='I am interested in the four-bedroom home on Oak Lane, PE8.';
+    }
     const stages=[...form.querySelectorAll('.applicationStage')];
     const progress=form.closest('.bespokeApplicationCard')?.querySelector('.applicationProgress');
     const sideSteps=[...document.querySelectorAll('.applicationAside li')];
