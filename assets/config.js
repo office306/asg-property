@@ -1,7 +1,7 @@
 window.AG_CONFIG = {
-  businessName: "AG Property Services (East) Ltd",
+  businessName: "ASG Property Ltd",
   phone: "07378 169004",
-  email: "office@agpropertyservice.com",
+  email: "office@asgproperty.co.uk",
   whatsapp: "447378169004",
   formUrl: ""
 };
