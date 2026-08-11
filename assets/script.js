@@ -102,25 +102,6 @@ document.addEventListener('DOMContentLoaded',function(){
       submitted=true;
       const button=form.querySelector('.submitApplication');
       button.disabled=true;button.textContent='Sending application…';
-      const leadFrame=document.createElement('iframe');
-      leadFrame.name='tenant-lead-response-'+Date.now();
-      leadFrame.className='formResponseFrame';
-      document.body.appendChild(leadFrame);
-      const leadForm=document.createElement('form');
-      leadForm.method='post';
-      leadForm.action='https://docs.google.com/forms/u/0/d/e/1FAIpQLSfCIhjXujI_MAonBbyGyKZxgVvUXx16wz5Bwk1wcIJo51YHdQ/formResponse';
-      leadForm.target=leadFrame.name;
-      const leadFields={
-        'entry.1029801545':form.querySelector('[name="entry.988995317"]').value,
-        'entry.1119170376':form.querySelector('[name="entry.2018621011"]').value,
-        'entry.193637968':form.querySelector('[name="entry.553183338"]').value,
-        'entry.2034330816':form.querySelector('[name="entry.1248601910"]').value,
-        'entry.1430671076':'I agree that ASG Property may use my details to contact me about Tenant Buyer opportunities. I have read the ASG Property Privacy Policy.'
-      };
-      Object.entries(leadFields).forEach(([name,value])=>{const input=document.createElement('input');input.type='hidden';input.name=name;input.value=value;leadForm.appendChild(input);});
-      document.body.appendChild(leadForm);
-      leadForm.submit();
-      setTimeout(()=>{leadForm.remove();leadFrame.remove();},20000);
     });
     frame?.addEventListener('load',()=>{
       if(!submitted)return;
