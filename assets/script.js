@@ -1,3 +1,77 @@
+// Google Analytics 4 with consent controls. No form-field values or contact details
+// are sent to Analytics.
+(function(){
+  const measurementId='G-H70YT3QCP5';
+  const consentKey='asg-analytics-consent';
+
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=window.gtag||function(){window.dataLayer.push(arguments);};
+  window.gtag('consent','default',{
+    analytics_storage:'denied',
+    ad_storage:'denied',
+    ad_user_data:'denied',
+    ad_personalization:'denied',
+    wait_for_update:500
+  });
+  window.gtag('js',new Date());
+  window.gtag('config',measurementId,{anonymize_ip:true});
+
+  const analyticsScript=document.createElement('script');
+  analyticsScript.async=true;
+  analyticsScript.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(measurementId);
+  document.head.appendChild(analyticsScript);
+
+  const setConsent=choice=>{
+    const granted=choice==='granted';
+    window.gtag('consent','update',{analytics_storage:granted?'granted':'denied'});
+    localStorage.setItem(consentKey,choice);
+    document.querySelector('.asg-cookie-banner')?.remove();
+  };
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    const savedConsent=localStorage.getItem(consentKey);
+    if(savedConsent){
+      setConsent(savedConsent);
+    }else{
+      const banner=document.createElement('div');
+      banner.className='asg-cookie-banner';
+      banner.setAttribute('role','dialog');
+      banner.setAttribute('aria-label','Analytics cookies');
+      banner.innerHTML='<div><strong>Help us improve this website</strong><p>We use optional analytics cookies to understand which pages are useful. No form details are sent to Analytics. <a href="/privacy.html">Privacy policy</a></p></div><div class="asg-cookie-actions"><button type="button" data-consent="denied">Reject</button><button type="button" data-consent="granted">Accept analytics</button></div>';
+      Object.assign(banner.style,{position:'fixed',zIndex:'10000',left:'16px',right:'16px',bottom:'16px',maxWidth:'760px',margin:'auto',padding:'18px',border:'1px solid rgba(255,255,255,.2)',borderRadius:'14px',background:'#101719',color:'#fff',boxShadow:'0 14px 40px rgba(0,0,0,.4)',display:'flex',gap:'18px',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap'});
+      banner.querySelector('p').style.margin='6px 0 0';
+      banner.querySelector('a').style.color='#63e6d3';
+      const actions=banner.querySelector('.asg-cookie-actions');
+      Object.assign(actions.style,{display:'flex',gap:'10px',flexWrap:'wrap'});
+      actions.querySelectorAll('button').forEach(button=>Object.assign(button.style,{padding:'10px 14px',borderRadius:'9px',border:'1px solid #63e6d3',cursor:'pointer'}));
+      actions.querySelector('[data-consent="granted"]').style.background='#63e6d3';
+      actions.querySelector('[data-consent="denied"]').style.background='transparent';
+      actions.querySelector('[data-consent="denied"]').style.color='#fff';
+      banner.addEventListener('click',event=>{
+        const button=event.target.closest('[data-consent]');
+        if(button)setConsent(button.dataset.consent);
+      });
+      document.body.appendChild(banner);
+    }
+
+    document.addEventListener('click',event=>{
+      const link=event.target.closest('a[href]');
+      if(!link)return;
+      const href=link.getAttribute('href')||'';
+      if(href.startsWith('tel:'))window.gtag('event','phone_click');
+      if(href.startsWith('mailto:'))window.gtag('event','email_click');
+      if(/wa\.me|whatsapp/i.test(href))window.gtag('event','whatsapp_click');
+    });
+
+    document.addEventListener('submit',event=>{
+      const form=event.target;
+      if(form.matches('.enquiryForm,.tenantFullApplicationForm')){
+        window.gtag('event','generate_lead',{form_type:form.classList.contains('tenantFullApplicationForm')?'tenant_buyer':'enquiry'});
+      }
+    });
+  });
+})();
+
 document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('.year').forEach(el=>el.textContent=new Date().getFullYear());
   document.querySelectorAll('span').forEach(el=>{
