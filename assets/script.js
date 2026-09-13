@@ -93,6 +93,7 @@ document.addEventListener('DOMContentLoaded',function(){
     const frame=form.parentElement.querySelector('.submissionFrame');
     const status=form.parentElement.querySelector('.formStatus');
     const btn=form.querySelector('button[type="submit"]');
+    const defaultButtonText=btn.textContent;
     let submitted=false;
     let confirmationTimer;
 
@@ -101,7 +102,7 @@ document.addEventListener('DOMContentLoaded',function(){
       submitted=false;
       clearTimeout(confirmationTimer);
       btn.disabled=false;
-      btn.textContent='Send enquiry';
+      btn.textContent=defaultButtonText;
 
       if(success){
         form.reset();
