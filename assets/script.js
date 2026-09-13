@@ -84,10 +84,17 @@ document.addEventListener('DOMContentLoaded',function(){
     legal.insertBefore(ownership,legal.lastElementChild);
   });
   document.querySelectorAll('.links').forEach(nav=>{
-    if(nav.querySelector('a[href="properties-available.html"]'))return;
-    const link=document.createElement('a');link.href='properties-available.html';link.textContent='Available Properties';
-    const tenantLink=nav.querySelector('a[href="tenant-buyers.html"]');
-    tenantLink?.insertAdjacentElement('afterend',link);
+    const tenantLink=nav.querySelector('a[href$="tenant-buyers.html"]');
+    let propertyLink=nav.querySelector('a[href$="properties-available.html"]');
+    if(!propertyLink&&tenantLink){
+      propertyLink=document.createElement('a');propertyLink.href='/properties-available.html';propertyLink.textContent='Available Properties';
+      tenantLink.insertAdjacentElement('afterend',propertyLink);
+    }
+    if(!nav.querySelector('a[href$="kings-cliffe-serviced-accommodation.html"]')){
+      const stayLink=document.createElement('a');stayLink.href='/kings-cliffe-serviced-accommodation.html';stayLink.textContent='Corporate Stays';
+      const referenceLink=propertyLink||tenantLink;
+      if(referenceLink)referenceLink.insertAdjacentElement('afterend',stayLink);else nav.appendChild(stayLink);
+    }
   });
   document.querySelectorAll('.enquiryForm').forEach(form=>{
     const frame=form.parentElement.querySelector('.submissionFrame');
