@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
     window.addEventListener('message',event=>{
       if(!submitted)return;
+      if(frame&&event.source!==frame.contentWindow)return;
 
       let result=event.data;
       if(typeof result==='string'){
@@ -129,10 +130,6 @@ document.addEventListener('DOMContentLoaded',function(){
 
       if(!result||result.type!=='asg-enquiry-result')return;
       finishSubmission(result.success===true);
-    });
-
-    frame?.addEventListener('load',()=>{
-      if(submitted)finishSubmission(true);
     });
 
     form.addEventListener('submit',()=>{
